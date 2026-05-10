@@ -1,0 +1,180 @@
+<?php
+
+namespace Ernestdefoe\SocialGroups\Api\Resource;
+
+use Ernestdefoe\SocialGroups\Model\SocialGroup;
+use Flarum\Api\Context;
+use Flarum\Api\Endpoint;
+use Flarum\Api\Resource\AbstractDatabaseResource;
+use Flarum\Api\Schema;
+use Flarum\Http\RequestUtil;
+use Illuminate\Database\Eloquent\Builder;
+use Tobyz\JsonApiServer\Context as BaseContext;
+
+class SocialGroupResource extends AbstractDatabaseResource
+{
+    public function type(): string
+    {
+        return 'social-groups';
+    }
+
+    public function model(): string
+    {
+        return SocialGroup::class;
+    }
+
+    public function endpoints(): array
+    {
+        return [
+            Endpoint\Index::make()
+                ->paginate()
+                ->scope(function (Builder $query, \Flarum\Api\Context $context) {
+                    $q = $context->getRequest()->getQueryParams()['filter']['q'] ?? null;
+                    if ($q) {
+                        $query->where(function ($sub) use ($q) {
+                            $sub->where('name', 'like', "%{$q}%")
+                                ->orWhere('description', 'like', "%{$q}%");
+                        });
+                    }
+                    $query->orderByDesc('member_count');
+                }),
+
+            Endpoint\Show::make(),
+
+            Endpoint\Create::make()
+                ->authenticated()
+                ->can('ernestdefoe-social-groups.create'),
+
+            Endpoint\Update::make()
+                ->authenticated()
+                ->authorize(fn ($actor, $model) => $actor->id === $model->user_id || $actor->isAdmin()),
+
+            Endpoint\Delete::make()
+                ->authenticated()
+                ->authorize(fn ($actor, $model) => $actor->id === $model->user_id || $actor->isAdmin()),
+        ];
+    }
+
+    public function fields(): array
+    {
+        return [
+            Schema\Str::make('name')
+                ->requiredOnCreate()
+                ->writable()
+                ->maxLength(100),
+
+            Schema\Str::make('slug')
+                ->nullable()
+                ->get(fn ($group) => $group->slug),
+
+            Schema\Str::make('description')
+                ->nullable()
+                ->writable()
+                ->maxLength(2000),
+
+            Schema\Str::make('color')
+                ->nullable()
+                ->writable(),
+
+            Schema\Str::make('imageUrl')
+                ->nullable()
+                ->get(fn ($group) => $group->image_url),
+
+            Schema\Str::make('bannerUrl')
+                ->nullable()
+                ->get(fn ($group) => $group->banner_url),
+
+            Schema\Boolean::make('isPrivate')
+                ->writable()
+                ->default(false)
+                ->get(fn ($group) => (bool) $group->is_private),
+
+            Schema\Integer::make('memberCount')
+                ->get(fn ($group) => (int) $group->member_count),
+
+            Schema\DateTime::make('createdAt'),
+
+            Schema\Boolean::make('canEdit')
+                ->get(function ($group, $request) {
+                    $actor = RequestUtil::getActor($request);
+                    return $actor->id === $group->user_id || $actor->isAdmin();
+                }),
+
+            Schema\Boolean::make('isMember')
+                ->get(function ($group, $request) {
+                    $actor = RequestUtil::getActor($request);
+                    if (! $actor->exists) {
+                        return false;
+                    }
+                    return $group->members()->where('user_id', $actor->id)->exists();
+                }),
+
+            Schema\Boolean::make('isCreator')
+                ->get(function ($group, $request) {
+                    $actor = RequestUtil::getActor($request);
+                    return $actor->id === $group->user_id;
+                }),
+
+            Schema\Str::make('membershipType')
+                ->get(fn ($g) => $g->membership_type ?? 'open')
+                ->set(fn ($model, $value) => $model->membership_type = $value)
+                ->writable()
+                ->nullable(),
+
+            Schema\Boolean::make('isPending')
+                ->get(function ($g, $req) {
+                    $actor = RequestUtil::getActor($req);
+                    if (! $actor->exists) {
+                        return false;
+                    }
+                    return $g->joinRequests()->where('user_id', $actor->id)->where('status', 'pending')->exists();
+                }),
+
+            Schema\Integer::make('pendingRequestCount')
+                ->get(function ($g, $req) {
+                    $actor = RequestUtil::getActor($req);
+                    if ($actor->id !== $g->user_id && ! $actor->isAdmin()) {
+                        return 0;
+                    }
+                    return $g->joinRequests()->where('status', 'pending')->count();
+                }),
+
+            Schema\Relationship\ToOne::make('user')
+                ->type('users')
+                ->includable(),
+        ];
+    }
+
+    public function creating(object $model, BaseContext $context): ?object
+    {
+        /** @var Context $context */
+        $actor = $context->getActor();
+        $model->user_id = $actor->id;
+        $model->slug = SocialGroup::createSlug($context->body()->attribute('name'));
+        $model->member_count = 1;
+        return null;
+    }
+
+    public function created(object $model, BaseContext $context): ?object
+    {
+        /** @var Context $context */
+        // Creator automatically joins as 'creator' role
+        $model->members()->create([
+            'user_id' => $context->getActor()->id,
+            'role'    => 'creator',
+            'joined_at' => now(),
+        ]);
+        return null;
+    }
+
+    public function updating(object $model, BaseContext $context): ?object
+    {
+        /** @var Context $context */
+        $name = $context->body()->attribute('name');
+        if ($name !== null && $model->name !== $name) {
+            $model->slug = SocialGroup::createSlug($name);
+        }
+        return null;
+    }
+
+}
