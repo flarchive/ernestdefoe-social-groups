@@ -2,13 +2,24 @@
 
 > **Read-only archive of released versions of ernestdefoe/social-groups.** Not for installation: use [Packagist](https://packagist.org/packages/ernestdefoe/social-groups) or the [upstream repository](https://github.com/ernestdefoe/social-groups).
 
-**0** versions archived · Latest: [`v2.5.0`](https://github.com/flarchive/ernestdefoe-social-groups/tree/archive/v2.5.0) · License: `MIT` · Flarum: `^2.0`
+**121** versions archived · Latest: [`v2.5.0`](https://github.com/flarchive/ernestdefoe-social-groups/tree/archive/v2.5.0) · License: `MIT` · Flarum: `^2.0`
 
 ## Archived Versions
 
 | Version | Released | Flarum | Source |
 |---|---|---|---|
-| — | — | — | — |
+| `2.0.0` | 2026-05-10 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-social-groups/tree/archive/v2.0.0) |
+| `2.0.1` | 2026-05-10 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-social-groups/tree/archive/v2.0.1) |
+| `2.0.10` | 2026-05-10 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-social-groups/tree/archive/v2.0.10) |
+| `2.0.11` | 2026-05-10 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-social-groups/tree/archive/v2.0.11) |
+| `2.0.2` | 2026-05-10 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-social-groups/tree/archive/v2.0.2) |
+| `2.0.3` | 2026-05-10 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-social-groups/tree/archive/v2.0.3) |
+| `2.0.4` | 2026-05-10 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-social-groups/tree/archive/v2.0.4) |
+| `2.0.5` | 2026-05-10 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-social-groups/tree/archive/v2.0.5) |
+| `2.0.6` | 2026-05-10 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-social-groups/tree/archive/v2.0.6) |
+| `2.0.7` | 2026-05-10 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-social-groups/tree/archive/v2.0.7) |
+
+[View all 121 versions](https://github.com/flarchive/ernestdefoe-social-groups/tags)
 
 Catalog entry: [packages/ernestdefoe-social-groups.json](https://github.com/flarchive/archive-index/blob/main/packages/ernestdefoe-social-groups.json)
 
