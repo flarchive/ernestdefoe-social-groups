@@ -1,0 +1,262 @@
+// ============================================================
+// Social Groups — Forum Styles (every page)
+// Only what renders outside the group pages: the user-card badges, the
+// primary-group selector and the post-header group chip. The group pages'
+// own styles live in pages.less, compiled into the lazy page chunk.
+// Flarum 2 · Avocado-theme compatible
+// Uses CSS custom properties throughout so the accent colour
+// always follows the active theme's --primary-color.
+// ============================================================
+
+@import "variables";
+
+// ── Dark-mode compatibility ──────────────────────────────────────────────────
+// Flarum themes implement dark mode in two ways:
+//   (a) redefining core CSS custom properties (--text-color etc.)
+//   (b) changing `color` on <body> directly — only `inherit` picks this up
+//
+// Our components use `color: inherit` for primary content text so BOTH
+// mechanisms work, and read core's --text-color directly where a variable
+// is genuinely needed. NEVER redefine core variables at :root here — aliasing
+// --text-color to a theme-only variable (--body-color) made every core
+// `color: var(--text-color)` invalid on stock Flarum, so text fell back to
+// inheritance and the user-card Controls dropdown rendered white-on-white.
+
+// ============================================================
+// Primary Group Selector (account settings)
+// ============================================================
+
+.SG-PrimaryGroupSelector {
+  // Direct child of the .UserCard-profile grid (104px 1fr); span both columns
+  // so it sits on its own full-width row instead of sharing a cell row with the
+  // group badges. (~"" escape stops LESS evaluating the slash as division.)
+  grid-column: ~"1 / -1";
+  margin: 1rem 0;
+
+  &-header {
+    display: block;
+    margin-bottom: 0.75rem;
+
+    strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .helpText {
+      display: block;
+      font-size: 0.85rem;
+      // Renders on the user-card hero (contrast-colored text) as well as the
+      // settings page — inherit whatever text color the context uses instead
+      // of a muted gray that vanishes against a colored hero.
+      color: inherit;
+      opacity: 0.75;
+    }
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+    gap: 10px;
+  }
+
+  &-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 10px 12px;
+    border-radius: @sg-radius-sm;
+    border: 2px solid var(--control-bg);
+    background: var(--body-bg);
+    // Tiles paint their own opaque body-bg, so they must also set their own
+    // text color — inheriting from the user-card hero left white-on-white
+    // labels on stock Flarum.
+    color: var(--text-color);
+    cursor: pointer;
+    text-align: center;
+    transition: border-color @sg-transition, background @sg-transition;
+
+    &:hover {
+      border-color: var(--muted-color);
+    }
+
+    &.active {
+      border-color: var(--primary-color, @sg-primary-hex);
+      // Layer the blue tint OVER an opaque body-bg — a bare rgba() background
+      // let the hero color bleed through the selected tile.
+      background: linear-gradient(rgba(74, 144, 226, 0.08), rgba(74, 144, 226, 0.08)) var(--body-bg);
+    }
+  }
+
+  &-radio {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    cursor: pointer;
+    accent-color: var(--primary-color, @sg-primary-hex);
+  }
+
+  &-tileImg,
+  &-tileBadge {
+    width: 64px;
+    height: 64px;
+    border-radius: @sg-radius-sm;
+    flex-shrink: 0;
+  }
+
+  &-tileImg {
+    object-fit: cover;
+  }
+
+  &-tileBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+
+    &--none {
+      background: var(--control-bg);
+      color: var(--muted-color);
+    }
+  }
+
+  &-tileName {
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  &-empty {
+    font-size: 0.85rem;
+    color: inherit;
+    opacity: 0.75;
+    font-style: italic;
+  }
+
+  &-saving {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: inherit;
+    opacity: 0.75;
+  }
+}
+
+// Primary-group chip in post headers (fof/badges forums)
+.SG-PostGroupChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 8px;
+  padding: 2px 9px 2px 3px;
+  border-radius: 999px;
+  background: var(--control-bg, #f3f4f6);
+  color: var(--text-color, #374151);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  vertical-align: middle;
+
+  &:hover { text-decoration: none; color: var(--text-color, #374151); opacity: 0.85; }
+
+  &-img, &-disc {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &-img { object-fit: cover; }
+
+  &-disc {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  &-name {
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// ── User Group Badges (Feature 19) ──────────────────────────────────────────
+.UserGroupBadges {
+  // Span both columns of the .UserCard-profile grid so the badges occupy their
+  // own full-width row rather than the narrow 104px avatar column.
+  grid-column: ~"1 / -1";
+  padding: 8px 16px 4px;
+  border-top: 1px solid var(--control-bg, #f0f0f0);
+  margin-top: 4px;
+
+  &-label {
+    font-size: 0.75em;
+    font-weight: 600;
+    // Sits directly on the user-card hero — inherit its contrast color
+    // (muted gray was illegible over saturated profile colors).
+    color: inherit;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+
+    i { margin-right: 3px; }
+  }
+
+  &-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px 3px 4px;
+    border-radius: 20px;
+    background: var(--control-bg, #f3f4f6);
+    text-decoration: none;
+    color: var(--text-color, #374151);
+    font-size: 0.8em;
+    transition: background 0.15s;
+
+    &:hover { background: var(--secondary-bg, #e5e7eb); text-decoration: none; }
+  }
+
+  &-img {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &-initial {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 0.65em;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  &-name {
+    font-weight: 500;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
