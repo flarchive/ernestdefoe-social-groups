@@ -1,0 +1,68 @@
+{
+    "name": "ernestdefoe/social-groups",
+    "description": "Social groups for Flarum 2 — members can create, join, and manage groups.",
+    "type": "flarum-extension",
+    "keywords": ["flarum", "social", "groups", "community"],
+    "homepage": "https://github.com/ernestdefoe/social-groups",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ernestdefoe",
+            "email": "ernestdefoe@gmail.com"
+        }
+    ],
+    "support": {
+        "forum": "https://discuss.flarum.org/d/39519-social-groups"
+    },
+    "require": {
+        "php": "^8.3",
+        "flarum/core": "^2.0"
+    },
+    "suggest": {
+        "fof/upload": "^2.0 — required for file/image attachments in group posts (the attach button in the post composer calls /api/fof/upload)"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ernestdefoe\\SocialGroups\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ernestdefoe\\SocialGroups\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Social Groups",
+            "category": "feature",
+            "icon": {
+                "name": "fa-solid fa-users",
+                "backgroundColor": "#4A90E2",
+                "color": "#fff"
+            }
+        }
+    },
+    "require-dev": {
+        "flarum/phpstan": "^2.0",
+        "flarum/testing": "^2.0"
+    },
+    "scripts": {
+        "test": [
+            "@test:integration"
+        ],
+        "test:integration": "phpunit -c tests/phpunit.integration.xml",
+        "test:setup": "@php tests/integration/setup.php",
+        "analyse:phpstan": "phpstan analyse"
+    },
+    "scripts-descriptions": {
+        "test": "Runs all tests.",
+        "test:integration": "Runs all integration tests.",
+        "test:setup": "Sets up a database for use with integration tests. Execute this only once.",
+        "analyse:phpstan": "Run static analysis"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "beta",
+    "prefer-stable": true
+}
