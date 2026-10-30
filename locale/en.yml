@@ -1,0 +1,298 @@
+ernestdefoe-social-groups:
+  forum:
+    groups:
+      title: Groups
+      create_button: Create Group
+      search_placeholder: Search groups…
+      empty_title: No groups yet
+      empty_text: Be the first to create a group!
+      empty_search: No groups match your search.
+      load_error: Failed to load groups. Please try again.
+      members_count: "{count, plural, one {# member} other {# members}}"
+      join: Join
+      leave: Leave
+      view: View
+      private: Private
+      public: Public
+      approval: Approval
+      approval_required: Approval required
+      for_buyers: For people who buy it
+      buy_to_join: Buy to join
+      request_to_join: Request to Join
+      switch: Switch to this group
+      request_switch: Request to switch
+      switch_confirm: "You'll leave {from} and join {to}. Groups in the {set} set allow one membership at a time."
+      request_switch_confirm: "If your request is approved, you'll leave {from} and join {to}. Groups in the {set} set allow one membership at a time."
+      in_set: "One of the {set} set: members belong to one at a time."
+      "pending": "Pending…"
+      featured: Featured
+      featured_heading: Featured Groups
+      feature: Feature group
+      unfeature: Unfeature group
+      pending_requests_badge: "{count, plural, one {# pending request — review} other {# pending requests — review}}"
+      generic_error: Something went wrong. Please try again.
+
+    create_modal:
+      title: Create a Group
+      name_label: Group Name
+      name_placeholder: e.g. Photography Lovers
+      description_label: Description
+      description_placeholder: What is this group about?
+      color_label: Accent Color
+      private_label: Private Group
+      private_help: Private groups are only visible to members.
+      membership_type_label: Membership
+      membership_type_open: "Open — anyone can join instantly"
+      membership_type_approval: "Approval required — creator must approve each request"
+      membership_type_paid: "Paid — people join by buying it in the store (an admin sells it from Kiosk)"
+      image_label: Group Image
+      banner_label: Banner Image
+      submit: Create Group
+      name_required: Group name is required.
+
+    edit_modal:
+      title: Edit Group
+      submit: Save Changes
+      exclusive_set_label: Exclusive set
+      exclusive_set_placeholder: "e.g. Houses"
+      exclusive_set_help: "Groups with the same set name allow one membership between them: joining one means leaving the other. Leave empty for an ordinary group. Members already in two groups of a set keep both. Only forum admins see this."
+
+    composer:
+      md_bold: Bold
+      md_italic: Italic
+      md_strike: Strikethrough
+      md_link: Insert link
+      md_quote: Quote
+      md_list: Bulleted list
+      md_code: Inline code
+      loading_preview: Loading preview…
+
+    discussions:
+      title: Discussions
+      search_placeholder: "Search posts…"
+      sort_label: "Order posts by"
+      sort_latest: "Latest reply"
+      sort_newest: "Newest"
+      sort_trending: "Trending"
+      empty: No discussions yet. Be the first to start one!
+      search_empty: No posts found for "{query}".
+      share_post: Share post
+      pin_post: Pin post
+      unpin_post: Unpin post
+      no_permission: You don't have permission to view posts in this group.
+      log_in_button: Log In
+      back: Back to Group
+      prev_page: Previous page
+      next_page: Next page
+      delete: Delete discussion
+      delete_confirm: Delete this discussion and all its replies?
+      reply_count: "{count, plural, one {# reply} other {# replies}}"
+      locked: Locked
+      reply_placeholder: Write a reply…
+      reply_button: Reply
+      join_to_reply: Join this group to reply.
+      post_reply: Post reply
+      more_options: More options
+      upload_image: Attach file
+      edited: (edited)
+      edit: Edit
+      save_edit: Save
+      cancel_edit: Cancel
+      edit_failed: Failed to save edit.
+      delete_post: Delete
+      delete_post_confirm: Delete this post?
+      delete_failed: "Couldn't delete that. Please try again."
+      react: React
+      view_comments: Comments
+      hide_comments: Hide Comments
+      view_all_comments: "View all {count, plural, one {# comment} other {# comments}} in thread"
+      feed_placeholder: "What's on your mind?"
+      comments_count: "{count, plural, one {# comment} other {# comments}}"
+      comments_empty: No comments yet. Be the first!
+      load_error: Failed to load posts. Please try refreshing the page.
+      pinned: Pinned
+      pinned_reply: Pinned by a group moderator
+      pin_reply: Pin this reply
+      unpin_reply: Unpin this reply
+      poll_label: Poll
+      poll_votes: "{count, plural, one {# vote} other {# votes}}"
+      poll_ended: Ended
+      poll_add: Add poll
+      poll_remove: Remove poll
+      poll_allow_multiple: Allow multiple choices
+      poll_question_placeholder: "Ask a question…"
+      poll_option_placeholder: "Option {number}"
+      poll_add_option: Add option
+      load_more_short: Load more
+      load_more_failed: Couldn't load more replies. Tap to retry.
+
+    group:
+      about_title: About this Group
+      edit: Edit Group
+      delete: Delete Group
+      delete_confirm: Are you sure you want to delete this group? This cannot be undone.
+      options: Group options
+      members_section: Members
+      description_placeholder: No description yet.
+      promote_member: Promote to Moderator
+      demote_member: Demote to Member
+      role_creator: Creator
+      role_admin: Moderator
+      remove_member: Remove
+      remove_member_confirm: "Remove {displayName} from this group? They will not be able to rejoin."
+      mute_member: Mute (member can read but not post)
+      unmute_member: Unmute
+      muted_badge: Muted
+      muted_notice: You have been muted in this group — you can read everything, but you can't post until a group moderator unmutes you.
+      not_found: Group not found.
+      members_load_error: Could not load members.
+      members_empty: No members yet.
+      rss_feed: RSS feed
+      tab_posts: Posts
+      tab_media: Media
+
+    profile_groups:
+      nav: Groups
+      empty: Not a member of any groups yet.
+
+    requests:
+      title: Join Requests
+
+    invite:
+      title: Invite Member
+      button: Invite
+      username_label: Username
+      username_placeholder: Enter exact username…
+      submit: Send Invite
+      success: "{username} has been added to the group."
+      error_generic: Something went wrong. Please try again.
+
+    upload:
+      change: Change
+      invalid_type: Invalid file type. Please upload a JPG, PNG, GIF, or WebP image.
+      too_large: File is too large. Maximum size is 5MB.
+      failed: Upload failed.
+      no_url: Upload succeeded but no file URL was returned.
+
+    media:
+      upload_button: Upload Images
+      upload_tooltip: Upload images to gallery
+      uploading: "Uploading…"
+      empty: No media found in this group yet.
+      view_post: View post
+      delete: Delete image
+      delete_confirm: Delete this image from the group's media?
+      close: Close
+      previous: Previous
+      next: Next
+
+    analytics:
+      title: Analytics
+      error: Failed to load analytics.
+      stat_members: Members
+      stat_posts: Posts
+      stat_reactions: Reactions
+      member_growth: "New Members — Last 30 Days"
+      post_volume: "Posts — Last 8 Weeks"
+      top_posts: Top Reacted Posts
+
+    primary_group:
+      title: Profile Group Badge
+      help: Choose which group displays on your profile card.
+      empty: You haven't joined any groups yet.
+      none: None
+      "saving": "Saving…"
+      save_failed: Failed to save.
+
+    thread:
+      typing_one: "{name} is typing…"
+      typing_two: "{name} and {other} are typing…"
+      typing_many: "{name} and {count} others are typing…"
+
+    share_modal:
+      title: Share Post
+      group_label: Share to which group?
+      empty: You are not a member of any other groups.
+      comment_placeholder: "Add a comment… (optional)"
+      shared: Shared.
+      submit: Share
+      cancel: Cancel
+
+    reactions:
+      like: Like
+      love: Love
+      haha: Haha
+      wow: Wow
+      sad: Sad
+      angry: Angry
+
+    notifications:
+      new_post: "posted in {discussionTitle}"
+      new_reply: "replied to your comment in {discussionTitle}"
+      join_request: "wants to join {groupName}"
+
+    settings:
+      notify_social_group_new_post_label: New posts in group discussions I participate in
+      notify_social_group_new_reply_label: Replies to my group comments
+      notify_social_group_join_request_label: Join requests for groups I manage
+
+  lib:
+    kiosk:
+      group: Social group
+    shared_from: "Shared from {name}"
+    shared_title: "Shared: {title}"
+    errors:
+      unexpected: An unexpected error occurred.
+      request_not_pending: This join request has already been handled.
+      not_active_member: That user is not an active member of this group.
+      cannot_promote_creator: The group creator already has full permissions.
+      cannot_demote_creator: The group creator cannot be demoted.
+      group_not_found: Group not found.
+      user_not_found: User not found.
+      discussion_not_found: Discussion not found.
+      no_file: No valid file uploaded
+      file_too_large: "File too large. Maximum size is {max}MB"
+      invalid_file_content: Invalid file content. Only image files are allowed.
+      invalid_url: Invalid URL.
+      url_host_not_allowed: URL host is not allowed.
+      fetch_failed: Could not fetch URL.
+      already_member: That user is already a member of this group.
+      group_private: This group is private.
+      removed_from_group: You have been removed from this group.
+      invite_only: This group is invite-only.
+      paid_only: This group is for people who buy it.
+      join_request_rejected: Your request to join was declined. You can ask again later.
+      poll_not_found: Poll not found.
+      poll_ended: This poll has ended.
+      poll_invalid_option: Invalid option.
+      poll_single_choice: This poll only allows one choice.
+      not_member: You are not a member of this group.
+      invite_banned: This member was removed from the group. Only the group's creator can invite them back.
+      too_many_previews: Too many link previews at once. Try again in a minute.
+      share_private_refused: Posts in a private group can't be shared outside it.
+      target_group_not_found: Target group not found.
+      content_too_long: Content may not exceed 20 000 characters.
+      post_content_too_long: Post content may not exceed 20 000 characters.
+      post_required_fields: discussionId and content are required.
+      parent_post_not_found: Parent post not found.
+      content_empty: Content cannot be empty.
+      invalid_reaction: Invalid reaction type.
+      media_required_fields: groupId and content are required.
+      media_member_required: You must be a member to upload media.
+      media_not_found: That image is no longer in this group's media.
+      media_delete_denied: You cannot delete this image.
+      content_or_poll_required: Content or a poll is required.
+      title_too_long: Title may not exceed 255 characters.
+      slug_conflict: Could not generate a unique slug for this group name. Please try a different name.
+      exclusive_conflict: "You're already in {group}. Groups in the {set} set allow one membership at a time."
+      exclusive_creator: "You created {group}, which is in the same set, so you can't switch away from it."
+      exclusive_invite: "{username} is already in {group}, which is in the same set. They can switch themselves."
+      exclusive_member_is_creator: "They created {group}, which is in the same set, so they can't be moved out of it."
+
+  admin:
+    settings:
+      max_image_bytes_label: Maximum group image/banner size (bytes)
+      max_image_bytes_help: Upload size limit for group avatars and banners, in bytes. Leave blank or 0 to use the default of 5242880 (5 MB).
+    permissions:
+      create_groups: Create social groups
+      moderate_groups: Edit & delete any social group
